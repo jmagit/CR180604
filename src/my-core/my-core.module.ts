@@ -1,11 +1,17 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CADENAS_PIPES } from './pipes/Cadenas.pipe';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: []
+  declarations: [
+    CADENAS_PIPES
+  ],
+  exports: [
+    CADENAS_PIPES
+  ]
 })
 export class MyCoreModule {
   constructor( @Optional() @SkipSelf() parentModule: MyCoreModule) {

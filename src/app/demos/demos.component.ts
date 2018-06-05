@@ -21,7 +21,7 @@ export class DemosComponent implements OnInit {
   resultado: string;
   // tslint:disable-next-line:no-inferrable-types
   visible: boolean = true;
-  estetica = { importante: true, error: false, remarcar: false };
+  estetica = { importante: true, error: false, remarcar: true };
 
   constructor(private out: LoggerService, public notify: NotifyService) { }
 

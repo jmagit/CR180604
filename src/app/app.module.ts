@@ -21,7 +21,7 @@ import { DemosComponent } from './demos/demos.component';
   ],
   providers: [
     LoggerService,
-    { provide: ERROR_LEBEL, useValue: 0 },
+    { provide: ERROR_LEBEL, useValue: 5 },
   ],
   bootstrap: [AppComponent]
 })

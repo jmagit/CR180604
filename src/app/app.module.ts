@@ -1,21 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { MyCoreModule } from '../my-core';
+import { MyCoreModule, LoggerService, ERROR_LEBEL } from '../my-core';
 
 
 import { AppComponent } from './app.component';
 import { ComunesModule } from './comunes/comunes.module';
+import { HomeComponent } from './home/home.component';
+import { DemosComponent } from './demos/demos.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    DemosComponent
   ],
   imports: [
     BrowserModule, FormsModule,
     MyCoreModule, ComunesModule,
   ],
-  providers: [],
+  providers: [
+    LoggerService,
+    { provide: ERROR_LEBEL, useValue: 0 },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

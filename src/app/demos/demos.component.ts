@@ -8,6 +8,7 @@ import { NotifyService } from '../comunes/notify.service';
   styleUrls: ['./demos.component.css']
 })
 export class DemosComponent implements OnInit {
+  // tslint:disable-next-line:no-inferrable-types
   nombre: string = 'Mundo';
   listado = [
     { id: 1, nombre: 'Toledo'},
@@ -18,6 +19,7 @@ export class DemosComponent implements OnInit {
   idProvincia = 2;
 
   resultado: string;
+  // tslint:disable-next-line:no-inferrable-types
   visible: boolean = true;
   estetica = { importante: true, error: false, remarcar: false };
 

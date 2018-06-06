@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CADENAS_PIPES } from './pipes/cadenas.pipe';
 import { SizerComponent } from './components/sizer/sizer.component';
 import { NUMERICOS_PIPES } from './pipes/numericos.pipes';
+import { VALIDACIONES_DIRECTIVES } from './directives/validaciones.directive';
 
 @NgModule({
   imports: [
@@ -10,11 +11,13 @@ import { NUMERICOS_PIPES } from './pipes/numericos.pipes';
   ],
   declarations: [
     CADENAS_PIPES, NUMERICOS_PIPES,
-    SizerComponent
+    SizerComponent,
+    VALIDACIONES_DIRECTIVES
   ],
   exports: [
     CADENAS_PIPES, NUMERICOS_PIPES,
-    SizerComponent
+    SizerComponent,
+    VALIDACIONES_DIRECTIVES
   ]
 })
 export class MyCoreModule {

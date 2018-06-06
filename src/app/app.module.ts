@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { DemosComponent } from './demos/demos.component';
 import { NotificationComponent } from './notification/notification.component';
 import { EuroPesetasComponent } from './euro-pesetas/euro-pesetas.component';
-import { PersonasComponent } from './personas/personas.component';
+import { PERSONAS_COMPONENTS } from './personas/personas.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { PersonasComponent } from './personas/personas.component';
     DemosComponent,
     NotificationComponent,
     EuroPesetasComponent,
-    PersonasComponent
+    PERSONAS_COMPONENTS
   ],
   imports: [
     BrowserModule, FormsModule,

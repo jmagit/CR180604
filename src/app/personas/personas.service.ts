@@ -58,4 +58,46 @@ export class PersonasVMService {
     }
   }
 
+  public delete(id: any) {
+    if (!window.confirm('¿Seguro?')) {
+      return;
+    }
+    // tslint:disable-next-line:triple-equals
+    const ind = this.listado.findIndex(item => item[this.pk] == id);
+    if (ind !== -1) {
+      this.listado.splice(ind, 1);
+      this.list();
+    } else {
+      this.out.warn('Elemento no encontrado.');
+    }
+  }
+
+  public cancel() {
+    this.elemento = {};
+    this.idOriginal = null;
+    this.list();
+  }
+
+  public send() {
+    switch (this.modo) {
+      case 'add':
+        this.listado.push(this.elemento);
+        this.cancel();
+        break;
+      case 'edit':
+        // tslint:disable-next-line:triple-equals
+        const ind = this.listado.findIndex(item => item[this.pk] == this.idOriginal);
+        if (ind !== -1) {
+          this.listado[ind] = this.elemento;
+          this.list();
+        } else {
+          this.notify.add('Elemento no encontrado.');
+        }
+        break;
+      case 'view':
+        this.cancel();
+        break;
+      }
+  }
+
 }

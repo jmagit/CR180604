@@ -1,0 +1,10 @@
+<div *ngIf="Servicio.Listado.length > 0" class="principal">
+  <ul>
+    <li *ngFor="let item of Servicio.Listado; let indice = index" >
+      {{item}} <button (click)="Servicio.remove(indice)" class="cierre">X</button>
+    </li>
+  </ul>
+  <div class="pie">
+      <button (click)="Servicio.clear()">Cerrar</button>
+  </div>
+</div>

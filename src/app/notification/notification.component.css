@@ -1,0 +1,10 @@
+.principal {
+  border: 1px solid;
+  background-color: rgba(255, 251, 0, 0.616);
+}
+.cierre {
+  float: right;
+}
+.pie {
+  text-align: center;
+}

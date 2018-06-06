@@ -9,4 +9,14 @@ export class ElipsisPipe implements PipeTransform {
   }
 }
 
-export const CADENAS_PIPES = [ ElipsisPipe ];
+@Pipe({
+  name: 'capitalize'
+})
+export class CapitalizePipe implements PipeTransform {
+  transform(value: any): any {
+    return typeof(value) === 'string' && value.length > 0 ?
+      value[0].toUpperCase() + value.substr(1).toLowerCase() : value;
+  }
+}
+
+export const CADENAS_PIPES = [ ElipsisPipe, CapitalizePipe ];

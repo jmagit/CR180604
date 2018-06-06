@@ -1,0 +1,9 @@
+<p>
+  Euros:
+  <input type="text" [(ngModel)]="Euros">
+  {{Euros | topesetas | number:'0.0-3'}}
+  <br>
+  Pesetas:
+  <input type="text" [(ngModel)]="Pesetas">
+  {{Pesetas | toeuros | number:'0.0-2'}}
+</p>

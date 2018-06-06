@@ -9,13 +9,15 @@ import { ComunesModule } from './comunes/comunes.module';
 import { HomeComponent } from './home/home.component';
 import { DemosComponent } from './demos/demos.component';
 import { NotificationComponent } from './notification/notification.component';
+import { EuroPesetasComponent } from './euro-pesetas/euro-pesetas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DemosComponent,
-    NotificationComponent
+    NotificationComponent,
+    EuroPesetasComponent
   ],
   imports: [
     BrowserModule, FormsModule,

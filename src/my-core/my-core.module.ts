@@ -1,18 +1,19 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CADENAS_PIPES } from './pipes/Cadenas.pipe';
+import { CADENAS_PIPES } from './pipes/cadenas.pipe';
 import { SizerComponent } from './components/sizer/sizer.component';
+import { NUMERICOS_PIPES } from './pipes/numericos.pipes';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    CADENAS_PIPES,
+    CADENAS_PIPES, NUMERICOS_PIPES,
     SizerComponent
   ],
   exports: [
-    CADENAS_PIPES,
+    CADENAS_PIPES, NUMERICOS_PIPES,
     SizerComponent
   ]
 })

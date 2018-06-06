@@ -10,7 +10,8 @@
 <p [textContent]="resultado">(Sin resultado)</p>
 <p [hidden]="!visible">Ahora me ves</p>
 <p *ngIf="visible">Ahora me existo</p>
-<p [ngClass]="estetica">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+<my-sizer [(size)]="tamanio" [min]="12"></my-sizer>
+<p [ngClass]="estetica" [style.font-size.px]="tamanio">Lorem ipsum dolor sit amet consectetur adipisicing elit.
   Natus accusantium nisi obcaecati voluptates ab impedit optio suscipit. Quos, minima necessitatibus at consequatur officia natus, perferendis ipsum repellat, ex deleniti voluptatem.</p>
 <p [class.error]="estetica.error">Solo el error</p>
 <p>

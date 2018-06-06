@@ -23,6 +23,8 @@ export class DemosComponent implements OnInit {
   visible: boolean = true;
   estetica = { importante: true, error: false, remarcar: true };
 
+  tamanio = 24;
+
   constructor(private out: LoggerService, public notify: NotifyService) { }
 
   ngOnInit() {

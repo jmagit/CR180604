@@ -13,6 +13,10 @@ import { NotificationComponent } from './notification/notification.component';
 import { EuroPesetasComponent } from './euro-pesetas/euro-pesetas.component';
 import { PERSONAS_COMPONENTS } from './personas/personas.component';
 import { PersonasVMService, PersonasVMDAOService } from './personas/personas.service';
+import { MenuComponent } from './menu/menu.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -21,11 +25,13 @@ import { PersonasVMService, PersonasVMDAOService } from './personas/personas.ser
     DemosComponent,
     NotificationComponent,
     EuroPesetasComponent,
-    PERSONAS_COMPONENTS
+    PERSONAS_COMPONENTS,
+    MenuComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
-    MyCoreModule, ComunesModule,
+    MyCoreModule, ComunesModule, RouterModule.forRoot(routes),
   ],
   providers: [
     LoggerService,

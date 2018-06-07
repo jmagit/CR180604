@@ -4,6 +4,7 @@ import { NotifyService } from '../comunes/notify.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +39,10 @@ export class PersonasVMDAOService {
   private elemento: any;
   private idOriginal: any;
   protected pk = 'id';
+  protected URLList = '/personas';
 
   constructor(private out: LoggerService, private notify: NotifyService,
-    private dao: PersonasDAOService) {}
+    private dao: PersonasDAOService, private router: Router) {}
 
   get Modo() {
     return this.modo;
@@ -111,7 +113,8 @@ export class PersonasVMDAOService {
   public cancel() {
     this.elemento = {};
     this.idOriginal = null;
-    this.list();
+    // this.list();
+    this.router.navigateByUrl(this.URLList);
   }
 
   public send() {
@@ -151,7 +154,8 @@ export class PersonasVMService {
   private idOriginal: any;
   protected pk = 'id';
 
-  constructor(private out: LoggerService, private notify: NotifyService) {}
+  constructor(private out: LoggerService, private notify: NotifyService,
+    private router: Router) {}
 
   get Modo() {
     return this.modo;

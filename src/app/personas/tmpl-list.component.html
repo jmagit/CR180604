@@ -2,16 +2,17 @@
   <tr>
     <th>Nombre</th>
     <th>
-        <button (click)="VM.add()">Añadir</button>
+        <button routerLink="/personas/add">Añadir</button>
     </th>
   </tr>
   <tr *ngFor="let item of VM.Listado">
     <td>
-      {{item.nombre}} {{item.apellidos}}
+      <a [routerLink]="['/personas', item.id, item.nombre + '-' + item.apellidos ]">
+        {{item.nombre}} {{item.apellidos}}
+      </a>
     </td>
     <td>
-      <button (click)="VM.view(item.id)">Ver</button>
-      <button (click)="VM.edit(item.id)">Editar</button>
+      <button [routerLink]="['/personas', item.id, 'edit']">Editar</button>
       <button (click)="VM.delete(item.id)">Borrar</button>
     </td>
   </tr>

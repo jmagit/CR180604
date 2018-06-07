@@ -1,10 +1,149 @@
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../my-core';
 import { NotifyService } from '../comunes/notify.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+export class PersonasDAOService {
+  private baseUrl = environment.WSUrl + 'personas';
+  private option = {};
+
+  constructor(private http: HttpClient) {}
+
+  query(): Observable<any> {
+    return this.http.get(this.baseUrl, this.option);
+  }
+  get(id: any) {
+    return this.http.get(this.baseUrl + '/' + id);
+  }
+  add(item: any) {
+    return this.http.post(this.baseUrl, item);
+  }
+  change(item: any) {
+    return this.http.put(this.baseUrl, item);
+  }
+  remove(id: any) {
+    return this.http.delete(this.baseUrl + '/' + id);
+  }
+}
+
+@Injectable()
+export class PersonasVMDAOService {
+  private modo: 'list' | 'add' | 'edit' | 'view' | 'delete' = 'list';
+  private listado: Array<any>;
+  private elemento: any;
+  private idOriginal: any;
+  protected pk = 'id';
+
+  constructor(private out: LoggerService, private notify: NotifyService,
+    private dao: PersonasDAOService) {}
+
+  get Modo() {
+    return this.modo;
+  }
+  get Listado() {
+    return this.listado;
+  }
+  get Elemento() {
+    return this.elemento;
+  }
+
+  public list() {
+    this.dao.query().subscribe(
+      data => {
+        this.listado = data;
+        this.modo = 'list';
+      },
+      error => {
+        this.notify.add(error.message);
+      }
+    );
+  }
+
+  public add() {
+    this.modo = 'add';
+    this.elemento = {};
+  }
+
+  public edit(id: any) {
+    this.dao.get(id).subscribe(
+      data => {
+        this.elemento = data;
+        this.idOriginal = id;
+        this.modo = 'edit';
+      },
+      error => {
+        this.notify.add(error.message);
+      }
+    );
+  }
+
+  public view(id: any) {
+    this.dao.get(id).subscribe(
+      data => {
+        this.elemento = data;
+        this.modo = 'view';
+      },
+      error => {
+        this.notify.add(error.message);
+      }
+    );
+  }
+
+  public delete(id: any) {
+    if (!window.confirm('¿Seguro?')) {
+      return;
+    }
+    this.dao.remove(id).subscribe(
+      data => {
+        this.list();
+      },
+      error => {
+        this.notify.add(error.message);
+      }
+    );
+  }
+
+  public cancel() {
+    this.elemento = {};
+    this.idOriginal = null;
+    this.list();
+  }
+
+  public send() {
+    switch (this.modo) {
+      case 'add':
+        this.dao.add(this.elemento).subscribe(
+          data => {
+            this.cancel();
+          },
+          error => {
+            this.notify.add(error.message);
+          }
+        );
+        break;
+      case 'edit':
+        this.dao.change(this.elemento).subscribe(
+          data => {
+            this.cancel();
+          },
+          error => {
+            this.notify.add(error.message);
+          }
+        );
+        break;
+      case 'view':
+        this.cancel();
+        break;
+    }
+  }
+}
+
+@Injectable()
 export class PersonasVMService {
   private modo: 'list' | 'add' | 'edit' | 'view' | 'delete' = 'list';
   private listado: Array<any>;
@@ -12,20 +151,26 @@ export class PersonasVMService {
   private idOriginal: any;
   protected pk = 'id';
 
-  constructor(private out: LoggerService, private notify: NotifyService) { }
+  constructor(private out: LoggerService, private notify: NotifyService) {}
 
-  get Modo() { return this.modo; }
-  get Listado() { return this.listado; }
-  get Elemento() { return this.elemento; }
+  get Modo() {
+    return this.modo;
+  }
+  get Listado() {
+    return this.listado;
+  }
+  get Elemento() {
+    return this.elemento;
+  }
 
   public list() {
     this.modo = 'list';
     if (!this.listado) {
       this.listado = [
-        { id: 1, nombre: 'Carmelo', apellidos: 'Coton', edad: 34},
-        { id: 2, nombre: 'Pepito', apellidos: 'Grillo', edad: 155},
-        { id: 3, nombre: 'Pedro', apellidos: 'Pica Piedra', edad: 55},
-        { id: 4, nombre: 'Pablo', apellidos: 'Marmol', edad: 43},
+        { id: 1, nombre: 'Carmelo', apellidos: 'Coton', edad: 34 },
+        { id: 2, nombre: 'Pepito', apellidos: 'Grillo', edad: 155 },
+        { id: 3, nombre: 'Pedro', apellidos: 'Pica Piedra', edad: 55 },
+        { id: 4, nombre: 'Pablo', apellidos: 'Marmol', edad: 43 }
       ];
     }
   }
@@ -86,7 +231,8 @@ export class PersonasVMService {
         break;
       case 'edit':
         // tslint:disable-next-line:triple-equals
-        const ind = this.listado.findIndex(item => item[this.pk] == this.idOriginal);
+        const ind = this.listado.findIndex(item => item[this.pk] == this.idOriginal
+        );
         if (ind !== -1) {
           this.listado[ind] = this.elemento;
           this.list();
@@ -97,7 +243,6 @@ export class PersonasVMService {
       case 'view':
         this.cancel();
         break;
-      }
+    }
   }
-
 }
